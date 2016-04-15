@@ -1,10 +1,3 @@
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-
-
 var errorHandlingPlugin = function(){
     this.setup = function(app){
         // error handlers
@@ -14,7 +7,7 @@ var errorHandlingPlugin = function(){
         if (app.get('env') === 'development') {
             app.use(function(err, req, res, next) {
                 res.status(err.status || 500);
-                res.render('error', {
+                res.send({
                     message: err.message,
                     error: err
                 });

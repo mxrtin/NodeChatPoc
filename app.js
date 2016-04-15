@@ -1,15 +1,16 @@
 var express = require('express');
 var pipeline = require('./infrastructure/pipeline.js');
 var errorHandling = require('./infrastructure/errorHandling.js');
+var routing = require('./infrastructure/routing.js');
+var dataAccess = require('./infrastructure/dataAccess.js');
+var security = require('./infrastructure/security.js');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
 var app = express();
 
 pipeline.setup(app);
-
-app.use('/', routes);
-app.use('/users', users);
+security.setup(app)
+routing.setup(app);
 errorHandling.setup(app);
+dataAccess.setup();
 
 module.exports = app;
